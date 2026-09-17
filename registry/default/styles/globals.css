@@ -1,0 +1,116 @@
+/*
+ * CSS для Storybook и тестов ui-kit: токены уровней 1-3 плюс референсный уровень 4.
+ * Компоненты этот файл не импортируют; во внешний проект уровень 4 попадает через item theme.
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "../tokens/tokens.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Уровень 4: проекция токенов в утилиты Tailwind. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
+
+  --radius-2xl: calc(var(--radius) + 12px);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: var(--font-inter);
+}
+
+/* Типографическая шкала из макета prometey.pen. */
+@theme {
+  --text-h1: 4rem;
+  --text-h1--line-height: 1.02;
+  --text-h1--letter-spacing: -0.04em;
+  --text-h1--font-weight: 700;
+
+  --text-h2: 2.25rem;
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 700;
+
+  --text-h3: 1.75rem;
+  --text-h3--line-height: 1.12;
+  --text-h3--letter-spacing: -0.02em;
+  --text-h3--font-weight: 700;
+
+  --text-h4: 1.375rem;
+  --text-h4--line-height: 1.18;
+  --text-h4--letter-spacing: -0.02em;
+  --text-h4--font-weight: 600;
+
+  --text-h5: 1.125rem;
+  --text-h5--line-height: 1.22;
+  --text-h5--font-weight: 600;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.45;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 0.9375rem;
+  --text-body-md--line-height: 1.5;
+  --text-body-md--font-weight: 400;
+
+  --text-link: 0.875rem;
+  --text-link--line-height: 1.2;
+  --text-link--font-weight: 500;
+
+  --text-nav-md: 0.875rem;
+  --text-nav-md--line-height: 1.2;
+  --text-nav-md--font-weight: 500;
+
+  --text-nav-sm: 0.8125rem;
+  --text-nav-sm--line-height: 1.2;
+  --text-nav-sm--font-weight: 500;
+
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.35;
+  --text-meta--font-weight: 400;
+
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.35;
+}
+
+/* Градиент основной кнопки из макета prometey.pen. */
+@utility bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
