@@ -365,7 +365,6 @@
         "senyakoz/ui-kit/sheet",
         "senyakoz/ui-kit/skeleton",
         "senyakoz/ui-kit/theme",
-        "senyakoz/ui-kit/theme-toggle",
         "senyakoz/ui-kit/utils"
       ],
       "files": [
@@ -478,9 +477,9 @@
       "name": "theme-toggle",
       "type": "registry:ui",
       "title": "Theme Toggle",
-      "description": "Тумблер светлой/тёмной темы на next-themes: до первого нажатия системная тема, заглушка до монтирования",
+      "description": "Презентационный переключатель темы: состояние и переключение приходят пропсами isDark/onToggleTheme; пока тема неизвестна (pending), показывает заглушку",
       "categories": ["actions"],
-      "dependencies": ["lucide-react", "next-themes"],
+      "dependencies": ["lucide-react"],
       "registryDependencies": [
         "senyakoz/ui-kit/button",
         "senyakoz/ui-kit/skeleton",

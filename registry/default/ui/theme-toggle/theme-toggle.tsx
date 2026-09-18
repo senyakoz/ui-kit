@@ -1,7 +1,4 @@
-"use client";
-
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -9,29 +6,34 @@ import { Button } from "@/registry/default/ui/button";
 import { Skeleton } from "@/registry/default/ui/skeleton";
 
 /**
- * Пропсы переключателя темы. Нативные пропсы уходят на кнопку.
+ * Пропсы переключателя темы. Компонент controlled: состояние и переключение приходят снаружи,
+ * сам он ничего не запрашивает. Нативные пропсы уходят на кнопку.
  */
-export interface ThemeToggleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface ThemeToggleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Тёмная ли тема сейчас. Определяет иконку и подпись для скринридера.
+   */
+  isDark: boolean;
+  /**
+   * Запросить переключение темы. Не вызывается, если onClick отменил событие.
+   */
+  onToggleTheme: () => void;
+  /**
+   * Тема ещё неизвестна (например, до гидрации): вместо кнопки показывается заглушка.
+   */
+  pending?: boolean;
+}
 
 /**
- * Тумблер светлой и тёмной темы на next-themes. Пока пользователь не нажимал,
- * действует системная тема; нажатие переключает на противоположную видимой и запоминает выбор.
- * До монтирования показывает заглушку того же размера, чтобы SSR-разметка совпала с клиентской.
+ * Переключатель светлой и тёмной темы. Презентационный: получает `isDark` и `onToggleTheme`
+ * пропсами, поэтому не зависит от провайдера темы и пригоден для любого потребителя.
  */
 const ThemeToggle = React.forwardRef<HTMLButtonElement, ThemeToggleProps>(
-  ({ className, onClick, ...props }, ref) => {
-    const { resolvedTheme, setTheme } = useTheme();
-    const [mounted, setMounted] = React.useState(false);
-
-    React.useEffect(() => {
-      setMounted(true);
-    }, []);
-
-    if (!mounted) {
+  ({ isDark, onToggleTheme, pending = false, className, onClick, ...props }, ref) => {
+    if (pending) {
       return <Skeleton className={cn("size-9 rounded-xl", className)} aria-hidden="true" />;
     }
 
-    const isDark = resolvedTheme === "dark";
     const Icon = isDark ? Moon : Sun;
 
     return (
@@ -44,7 +46,7 @@ const ThemeToggle = React.forwardRef<HTMLButtonElement, ThemeToggleProps>(
         aria-label={isDark ? "Включить светлую тему" : "Включить тёмную тему"}
         onClick={(event) => {
           onClick?.(event);
-          if (!event.defaultPrevented) setTheme(isDark ? "light" : "dark");
+          if (!event.defaultPrevented) onToggleTheme();
         }}
         {...props}
       >

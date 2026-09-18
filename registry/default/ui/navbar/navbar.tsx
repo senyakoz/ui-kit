@@ -1,5 +1,4 @@
 import { Skeleton } from "@/registry/default/ui/skeleton";
-import { ThemeToggle } from "@/registry/default/ui/theme-toggle";
 import type { NavbarProps } from "./navbar.types";
 import { NavbarAuthActions } from "./navbar-auth-actions";
 import { NavbarBrand } from "./navbar-brand";
@@ -12,6 +11,7 @@ export function Navbar({
   pathname,
   brandHref,
   isAuthenticated,
+  actions,
   isLoading = false,
   userName = "",
   userEmail = "",
@@ -27,7 +27,7 @@ export function Navbar({
         {isAuthenticated && <NavbarLinks items={items} pathname={pathname} />}
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
+          {actions}
 
           {isAuthenticated && <NavbarMobileMenu items={items} />}
 

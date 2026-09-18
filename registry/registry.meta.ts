@@ -122,7 +122,7 @@ export const components: Record<string, ComponentMeta> = {
   "theme-toggle": {
     title: "Theme Toggle",
     description:
-      "Тумблер светлой/тёмной темы на next-themes: до первого нажатия системная тема, заглушка до монтирования",
+      "Презентационный переключатель темы: состояние и переключение приходят пропсами isDark/onToggleTheme; пока тема неизвестна (pending), показывает заглушку",
     category: "actions",
     type: "registry:ui",
   },
